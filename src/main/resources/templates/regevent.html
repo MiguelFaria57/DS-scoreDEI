@@ -1,0 +1,70 @@
+<a th:href="@{/menu}">MENU</a></a> <a> - </a>
+<a th:href="@{/allmatches}">MATCHES</a> <a> - </a>
+<a th:href="@{/allmatches/{id}(id=${match_id})}"><label th:text="${match_id}"></label></a>
+<br>
+<label>________________________________________________________________________________________________________</label>
+<br>
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<form id="form1" th:action="@{/allmatches/__${match_id}__/regevent}" th:object="${event}" method="post">
+    <h1>REGISTER EVENT</h1>
+    <label>Type</label>
+    <select id="type" th:field="*{type}">
+        <option value="" hidden>Select Event Type</option>
+        <option th:value="Goal">Goal</option>
+        <option th:value="Yellow_Card">Yellow Card</option>
+        <option th:value="Red_Card">Red Card</option>
+        <option th:value="Match_Start">Match Start</option>
+        <option th:value="Match_End">Match End</option>
+        <option th:value="Interrupted_Match">Interrupted Match</option>
+        <option th:value="Resumed_Match">Resumed Match</option>
+    </select>
+    <br>
+    <br>
+    <a id="date">
+        <label>Timestamp</label>
+        <input placeholder="YYYY-MM-DD HH:MM:SS" type="text" th:field="*{event_date}">
+        <br>
+        <br>
+    </a>
+    <a id="team">
+        <label>Team</label>
+        <select id="select" th:field="*{team_name}">
+            <option value="" hidden>Select Team</option>
+            <option th:value="${teamA}" th:text="${teamA}"></option>
+            <option th:value="${teamB}" th:text="${teamB}"></option>
+        </select>
+        <br>
+        <br>
+    </a>
+    <a id="player">
+        <label>Player</label>
+        <select th:field="*{player_name}">
+            <option value="" hidden>Select Player</option>
+            <tr th:each="element : ${players}">
+                <option th:value="${element}" th:text="${element}"></option>
+            </tr>
+        </select>
+    </a>
+</form>
+<br>
+<td th:text="${result}"></td>
+<br>
+<button form="form1" value="Submit" type="submit">Submit</button>
+<script>
+    $(document).ready(function(){
+        $('#type').on('change', function () {
+            if(this.value === "Yellow_Card" || this.value === "Red_Card"){
+                $("#team").hide();
+                $("#player").show();
+            }
+            else if (this.value === "Goal"){
+                $("#team").show();
+                $("#player").show();
+            }
+            else{
+                $("#team").hide();
+                $("#player").hide();
+            }
+        });
+    });
+</script>

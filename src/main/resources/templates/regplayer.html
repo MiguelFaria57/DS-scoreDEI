@@ -1,0 +1,24 @@
+<a th:href="@{/menu}">MENU</a>
+<br>
+<label>________________________________________________________________________________________________________</label>
+<br>
+<form th:action="@{/regplayer}" th:object="${player}" method="post">
+  <div="form-row">
+  <h1>REGISTER PLAYER</h1>
+  <label>Player Name</label>
+  <input placeholder="PLAYER NAME" type="text" th:field="*{name}">
+  <br>
+  <label>Position</label>
+  <input placeholder="POSITION" type="text" th:field="*{position}">
+  <br>
+  <label>Birth Date</label>
+  <input placeholder="YYYY-MM-DD HH:MM:SS" type="text" th:field="*{birth_date}">
+  <br>
+  <label>Team Name</label>
+  <input placeholder="TEAM NAME" type="text" th:field="*{team_name}">
+  <br>
+  <td th:text="${result}"></td>
+  <br>
+  <button type="submit">Register</button>
+  </div>
+</form>

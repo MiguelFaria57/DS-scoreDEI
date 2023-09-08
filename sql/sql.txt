@@ -1,0 +1,78 @@
+CREATE TABLE login (
+    login_id     BIGINT,
+    username VARCHAR(512) UNIQUE NOT NULL,
+    password VARCHAR(512) NOT NULL,
+    name     VARCHAR(512),
+    email     VARCHAR(512) UNIQUE,
+    phone     VARCHAR(512) UNIQUE,
+    is_admin BOOL,
+    PRIMARY KEY(login_id)
+);
+
+CREATE TABLE team (
+    team_id     BIGINT,
+    image_url VARCHAR(512),
+    name     VARCHAR(512) UNIQUE,
+    games     INTEGER,
+    wins     INTEGER,
+    losses     INTEGER,
+    draws     INTEGER,
+    PRIMARY KEY(team_id)
+);
+
+CREATE TABLE player (
+    player_id     BIGINT,
+    name     VARCHAR(512),
+    position     VARCHAR(512),
+    birth_date DATE,
+    PRIMARY KEY(player_id)
+);
+
+CREATE TABLE match (
+    match_id     BIGINT,
+    location     VARCHAR(512),
+    match_date     DATE,
+    team_a_id     BIGINT NOT NULL,
+    team_b_id BIGINT NOT NULL,
+    PRIMARY KEY(match_id)
+);
+
+CREATE TABLE event (
+    event_id     BIGINT,
+    is_valid     BOOL,
+    type         VARCHAR(512),
+    event_date     TIMESTAMP,
+    team_id     BIGINT NOT NULL,
+    player_id BIGINT NOT NULL,
+    match_id     BIGINT NOT NULL,
+    PRIMARY KEY(event_id)
+);
+
+CREATE TABLE team_player (
+    team_id     BIGINT,
+    player_id BIGINT,
+    PRIMARY KEY(team_id,player_id)
+);
+
+ALTER TABLE match ADD CONSTRAINT match_fk1 FOREIGN KEY (team_a_id) REFERENCES team(team_id);
+ALTER TABLE match ADD CONSTRAINT match_fk2 FOREIGN KEY (team_b_id) REFERENCES team(team_id);
+ALTER TABLE event ADD CONSTRAINT event_fk1 FOREIGN KEY (team_id) REFERENCES team(team_id);
+ALTER TABLE event ADD CONSTRAINT event_fk2 FOREIGN KEY (player_id) REFERENCES player(player_id);
+ALTER TABLE event ADD CONSTRAINT event_fk3 FOREIGN KEY (match_id) REFERENCES match(match_id);
+ALTER TABLE team_player ADD CONSTRAINT team_player_fk1 FOREIGN KEY (team_id) REFERENCES team(team_id);
+ALTER TABLE team_player ADD CONSTRAINT team_player_fk2 FOREIGN KEY (player_id) REFERENCES player(player_id);
+
+CREATE SEQUENCE public.login_sequence INCREMENT 1 START 1 MINVALUE 1;
+ALTER TABLE ONLY login ALTER COLUMN login_id SET DEFAULT nextval('login_sequence'::regclass);
+CREATE SEQUENCE public.team_sequence INCREMENT 1 START 1 MINVALUE 1;
+ALTER TABLE ONLY team ALTER COLUMN team_id SET DEFAULT nextval('team_sequence'::regclass);
+CREATE SEQUENCE public.player_sequence INCREMENT 1 START 1 MINVALUE 1;
+ALTER TABLE ONLY player ALTER COLUMN player_id SET DEFAULT nextval('player_sequence'::regclass);
+CREATE SEQUENCE public.match_sequence INCREMENT 1 START 1 MINVALUE 1;
+ALTER TABLE ONLY match ALTER COLUMN match_id SET DEFAULT nextval('match_sequence'::regclass);
+CREATE SEQUENCE public.event_sequence INCREMENT 1 START 1 MINVALUE 1;
+ALTER TABLE ONLY event ALTER COLUMN event_id SET DEFAULT nextval('event_sequence'::regclass);
+
+INSERT INTO team (team_id, image_url, name, games, wins, losses, draws) VALUES (0, ' ', ' ', 0, 0, 0, 0);
+INSERT INTO player (player_id, name, position, birth_date) VALUES (0, ' ', ' ', '0001-01-01');
+INSERT INTO login (username, password, name, email, phone, is_admin) VALUES ('admin', 'password', 'administrator', 'admin@dei.uc.pt', '910000001', true);

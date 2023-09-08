@@ -1,0 +1,30 @@
+<a th:href="@{/menu}">MENU</a>
+<br>
+<label>________________________________________________________________________________________________________</label>
+<br>
+<form th:action="@{/reguser}" th:object="${user}" method="post">
+  <div="form-row">
+  <h1>REGISTER USER</h1>
+  <label>Username</label>
+  <input placeholder="USERNAME" type="text" th:field="*{username}">
+  <br>
+  <label>Password</label>
+  <input placeholder="PASSWORD" type="text" th:field="*{password}">
+  <br>
+  <label>Admin</label>
+  <input type="checkbox" th:field="*{admin}">
+  <br>
+  <label>Mail</label>
+  <input placeholder="MAIL" type="text" th:field="*{email}">
+  <br>
+  <label>Phone</label>
+  <input placeholder="PHONE NUMBER" type="text" th:field="*{phone}">
+  <br>
+  <label>Name</label>
+  <input placeholder="NAME" type="text" th:field="*{name}">
+  <br>
+  <td th:text="${result}"></td>
+  <br>
+  <button type="submit">Register</button>
+  </div>
+</form>

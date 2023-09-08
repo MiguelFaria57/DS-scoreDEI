@@ -1,0 +1,21 @@
+<a th:href="@{/menu}">MENU</a>
+<br>
+<label>________________________________________________________________________________________________________</label>
+<br>
+<h1>ALL MATCHES</h1>
+<table id="table1" border="1">
+    <tr>
+        <th>ID</th>
+        <th>TEAM A</th>
+        <th>TEAM B</th>
+        <th>LOCATION</th>
+        <th>DATE</th>
+    </tr>
+    <tr th:each="m: ${matches}">
+        <td> <a th:href="@{/allmatches/{id}(id=${m.match_id})}"><label th:text="${m.match_id}"></label></a> </td>
+        <td th:text="${m.team_a}">team_a</td>
+        <td th:text="${m.team_b}">team_b</td>
+        <td th:text="${m.location}">location</td>
+        <td th:text="${m.match_date}">date</td>
+    </tr>
+</table>

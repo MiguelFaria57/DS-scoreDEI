@@ -1,0 +1,25 @@
+<a th:href="@{/menu}">MENU</a>
+<br>
+<label>________________________________________________________________________________________________________</label>
+<br>
+<h1>ALL TEAMS</h1>
+<table id="table1" border="1">
+    <tr>
+        <th>ID</th>
+        <th>EMBLEM</th>
+        <th>NAME</th>
+        <th>GAMES</th>
+        <th>WINS</th>
+        <th>LOSSES</th>
+        <th>DRAWS</th>
+    </tr>
+    <tr th:each="t: ${teams}">
+        <td> <a th:href="@{/allteams/{id}(id=${t.team_id})}"><label th:text="${t.team_id}"></label></a> </td>
+        <td> <img th:src="${t.image_url}" height="50" width="50"></td>
+        <td th:text="${t.name}">name</td>
+        <td th:text="${t.games}">games</td>
+        <td th:text="${t.wins}">wins</td>
+        <td th:text="${t.losses}">losses</td>
+        <td th:text="${t.draws}">draws</td>
+    </tr>
+</table>

@@ -1,0 +1,21 @@
+<a th:href="@{/menu}">MENU</a> <a> - </a>
+<a th:href="@{/allplayers}">PLAYERS</a> <a> - </a>
+<a th:href="@{/allplayers/{id}(id=${player_id})}"><label th:text="${player_id}"></label></a>
+<br>
+<label>________________________________________________________________________________________________________</label>
+<br>
+<form th:action="@{/allplayers/__${player_id}__/manageplayer}" th:object="${fp}" method="post">
+    <h1>MANAGE PLAYER</h1>
+    <label>New Name</label>
+    <input type="text" th:field="*{name}">
+    <br>
+    <label>New Position</label>
+    <input type="text" th:field="*{position}">
+    <br>
+    <label>New Birth Date</label>
+    <input type="text" th:field="*{birth_date}">
+    <br>
+    <td th:text="${result}"></td>
+    <br>
+    <button type="submit">Update</button>
+</form>

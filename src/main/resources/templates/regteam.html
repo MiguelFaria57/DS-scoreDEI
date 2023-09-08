@@ -1,0 +1,18 @@
+<a th:href="@{/menu}">MENU</a>
+<br>
+<label>________________________________________________________________________________________________________</label>
+<br>
+<form th:action="@{/regteam}" th:object="${team}" method="post">
+  <div="form-row">
+  <h1>REGISTER TEAM</h1>
+  <label>Team Name</label>
+  <input placeholder="TEAM NAME" type="text" th:field="*{name}">
+  <br>
+  <label>Image URL</label>
+  <input placeholder="IMAGE URL" type="text" th:field="*{image_url}">
+  <br>
+  <td th:text="${result}"></td>
+  <br>
+  <button type="submit">Register</button>
+  </div>
+</form>

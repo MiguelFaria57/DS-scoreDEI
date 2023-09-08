@@ -1,0 +1,36 @@
+<a th:href="@{/menu}">MENU</a></a> <a> - </a>
+<a th:href="@{/allmatches}">MATCHES</a> <a> - </a>
+<a th:href="@{/allmatches/{id}(id=${match_id})}"><label th:text="${match_id}"></label></a>
+<br>
+<label>________________________________________________________________________________________________________</label>
+<br>
+<form th:action="@{/allmatches/__${match_id}__/manageevent}" th:object="${check}" method="post">
+    <div="form-row">
+    <h1>MANAGE EVENTS</h1>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>TYPE</th>
+            <th>DATE</th>
+            <th>TEAM</th>
+            <th>PLAYER</th>
+            <th>VALID</th>
+        </tr>
+        <tr th:each="e: ${events}">
+            <td th:text="${e.event_id}">id</td>
+            <td th:text="${e.type}">type</td>
+            <td th:text="${e.event_date}">date</td>
+            <td th:text="${e.team_id}">team</td>
+            <td th:text="${e.player_id}">player</td>
+            <td><input type="checkbox" name="active" disabled="disabled" th:checked="${e.is_valid}"></td>
+        </tr>
+    </table>
+    <br>
+    <label>Event ID to Change</label>
+    <input type="text" th:field="*{event_id}">
+    <button type="submit">Submit</button>
+    <br>
+    <td th:text="${result}"></td>
+    <br>
+    </div>
+</form>

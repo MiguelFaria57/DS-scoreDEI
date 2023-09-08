@@ -1,0 +1,18 @@
+<a th:href="@{/menu}">MENU</a></a> <a> - </a>
+<a th:href="@{/allmatches}">MATCHES</a> <a> - </a>
+<a th:href="@{/allmatches/{id}(id=${match_id})}"><label th:text="${match_id}"></label></a>
+<br>
+<label>________________________________________________________________________________________________________</label>
+<br>
+<form th:action="@{/allmatches/__${match_id}__/managematch}" th:object="${fm}" method="post">
+    <h1>MANAGE MATCH</h1>
+    <label>New Location</label>
+    <input type="text" th:field="*{location}">
+    <br>
+    <label>New Date</label>
+    <input type="text" th:field="*{match_date}">
+    <br>
+    <td th:text="${result}"></td>
+    <br>
+    <button type="submit">Update</button>
+</form>

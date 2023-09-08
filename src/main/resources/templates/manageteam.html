@@ -1,0 +1,40 @@
+<a th:href="@{/menu}">MENU</a> <a> - </a>
+<a th:href="@{/allteams}">TEAMS</a> <a> - </a>
+<a th:href="@{/allteams/{id}(id=${team_id})}"><label th:text="${team_id}"></label></a>
+<br>
+<label>________________________________________________________________________________________________________</label>
+<br>
+<h1>MANAGE TEAM</h1>
+<form th:action="@{/allteams/__${team_id}__/manageteam}" th:object="${ft}" method="post">
+    <h3>Change Team Info</h3>
+    <label>New Name</label>
+    <input type="text" th:field="*{name}">
+    <br>
+    <label>New EMBLEM</label>
+    <input type="text" th:field="*{image_url}">
+    <br>
+    <td th:text="${result}"></td>
+    <br>
+    <button type="submit">Update</button>
+</form>
+<form th:action="@{/allteams/__${team_id}__/manageteam/addplayer}" th:object="${ft}" method="post">
+    <h3>Change Team Players</h3>
+    <select th:field="${ft.name}">
+        <tr th:each="element : ${players}">
+            <option th:value="${element.name}" th:text="${element.name}"></option>
+        </tr>
+    </select>
+    <button type="submit">Add Player</button>
+    <td th:text="${result}"></td>
+    <br>
+</form>
+<form th:action="@{/allteams/__${team_id}__/manageteam/removeplayer}" th:object="${ft}" method="post">
+    <select th:field="${ft.name}">
+        <tr th:each="element : ${team_players}">
+            <option th:value="${element.name}" th:text="${element.name}"></option>
+        </tr>
+    </select>
+    <button type="submit">Remove Player</button>
+    <td th:text="${result}"></td>
+    <br>
+</form>

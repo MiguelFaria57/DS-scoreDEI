@@ -1,0 +1,88 @@
+<a th:href="@{/menu}">MENU</a>
+<br>
+<label>________________________________________________________________________________________________________</label>
+<br>
+<h1>BEST PLAYER STATISTICS</h1>
+<label>Best Goal Scorer: </label> <label th:text="${fps.name}">name</label>
+<br>
+<label>Number of Goals: </label> <label th:text="${fps.goals}">goals</label>
+<br>
+<label>Goal Mean: </label> <label th:text="${fps.meanGoals}">meanGoals</label>
+<br>
+<label>Best Match ID: </label> <label th:text="${fps.maxGoalsInMatch}">maxGoalsInMatch</label>
+<br>
+<label>Most Goals in a Match: </label> <label th:text="${fps.maxGoalsInMatchNumber}">maxGoalsInMatchNumber</label>
+<br>
+<br>
+<h1>TEAM VS TEAM</h1>
+<form th:action="@{/teamsvsteam}" th:object="${teamvsteam}" method="get">
+    <label>Team A</label>
+    <select th:field="*{team_a}">
+        <option value="" hidden>Select Team A</option>
+        <tr th:each="element : ${teamNames}">
+            <option th:value="${element}" th:text="${element}"></option>
+        </tr>
+    </select>
+    <label>Team B</label>
+    <select th:field="*{team_b}">
+        <option value="" hidden>Select Team B</option>
+        <tr th:each="element : ${teamNames}">
+            <option th:value="${element}" th:text="${element}"></option>
+        </tr>
+    </select>
+    <button type="submit">Submit</button>
+    <td th:text="${result}"></td>
+</form>
+<br>
+<h1>TEAMS STATISTICS</h1>
+<button onclick="sortTable(2)">Sort By Games</button>
+<button onclick="sortTable(3)">Sort By Wins</button>
+<button onclick="sortTable(4)">Sort By Losses</button>
+<button onclick="sortTable(5)">Sort By Draws</button>
+<br>
+<br>
+<table id="myTable" border="1">
+    <tr>
+        <th>EMBLEM</th>
+        <th>TEAM</th>
+        <th>GAMES</th>
+        <th>WINS</th>
+        <th>LOSSES</th>
+        <th>DRAWS</th>
+    </tr>
+    <tr th:each="t: ${teams}">
+        <td> <img th:src="${t.image_url}" height="50" width="50"></td>
+        <td th:text="${t.name}">name</td>
+        <td th:text="${t.games}">games</td>
+        <td th:text="${t.wins}">wins</td>
+        <td th:text="${t.losses}">losses</td>
+        <td th:text="${t.draws}">draws</td>
+    </tr>
+</table>
+<br>
+
+
+<script>
+    function sortTable(r) {
+        var table, rows, switching, i, x, y, shouldSwitch;
+        table = document.getElementById("myTable");
+        switching = true;
+        while (switching) {
+            switching = false;
+            rows = table.rows;
+            for (i = 1; i < (rows.length - 1); i++) {
+                shouldSwitch = false;
+                x = rows[i].getElementsByTagName("TD")[r];
+                y = rows[i + 1].getElementsByTagName("TD")[r];
+                if (Number(x.innerHTML) < Number(y.innerHTML)) {
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+            if (shouldSwitch) {
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+            }
+        }
+    }
+</script>

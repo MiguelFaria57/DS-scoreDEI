@@ -1,0 +1,32 @@
+<h1>MENU</h1>
+<form>
+    <a th:href="@{/login}">Login</a>
+    <br>
+    <br>
+    <a th:href="@{/allmatches}">Matches</a>
+    <br>
+    <br>
+    <a th:href="@{/allteams}">Teams</a>
+    <br>
+    <br>
+    <a th:href="@{/allplayers}">Players</a>
+    <br>
+    <br>
+    <a th:href="@{/statistics}">Statistics</a>
+</form>
+
+<form th:if="${permission=='1'}">
+    <a th:href="@{/reguser}">Register User</a>
+    <br>
+    <br>
+    <a th:href="@{/regteam}">Register Team</a>
+    <br>
+    <br>
+    <a th:href="@{/regplayer}">Register Player</a>
+    <br>
+    <br>
+    <a th:href="@{/regmatch}">Register Match</a>
+    <br>
+    <br>
+    <a th:href="@{/populate}">Populate DB</a>
+</form>

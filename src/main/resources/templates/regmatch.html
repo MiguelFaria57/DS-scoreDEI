@@ -1,0 +1,34 @@
+<a th:href="@{/menu}">MENU</a>
+<br>
+<label>________________________________________________________________________________________________________</label>
+<br>
+<form th:action="@{/regmatch}" th:object="${match}" method="post">
+  <div="form-row">
+    <h1>REGISTER MATCH</h1>
+    <label>Location</label>
+    <input placeholder="LOCATION NAME" type="text" th:field="*{location}">
+    <br>
+    <label>Date</label>
+    <input placeholder="YYYY-MM-DD" type="text" th:field="*{match_date}">
+    <br>
+    <label>Team A</label>
+    <select th:field="*{team_a}">
+      <option value="" hidden>Select Team A</option>
+      <tr th:each="element : ${teams}">
+        <option th:value="${element}" th:text="${element}"></option>
+      </tr>
+    </select>
+    <br>
+    <label>Team B</label>
+    <select th:field="*{team_b}">
+      <option value="" hidden>Select Team B</option>
+      <tr th:each="element : ${teams}">
+        <option th:value="${element}" th:text="${element}"></option>
+      </tr>
+    </select>
+    <br>
+    <td th:text="${result}"></td>
+    <br>
+    <button type="submit">Register</button>
+  </div>
+</form>

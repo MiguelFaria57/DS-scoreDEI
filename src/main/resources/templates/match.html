@@ -1,0 +1,41 @@
+<a th:href="@{/menu}">MENU</a></a> <a> - </a> <a th:href="@{/allmatches}">MATCHES</a>
+<br>
+<label>________________________________________________________________________________________________________</label>
+<br>
+<h1 th:text="${name}">name</h1>
+<h2 th:text="${scores}">scores</h2>
+<br>
+<h3>Info</h3>
+<p th:text="${location}">location</p>
+<p th:text="${date}">date</p>
+<form th:action="@{/allmatches/__${match_id}__/managematch}" method="get">
+    <form th:if="${permissionAdmin=='1'}">
+        <button type="submit">Manage Match</button>
+    </form>
+</form>
+<h3>Events</h3>
+<table border="1">
+    <tr>
+        <th>TYPE</th>
+        <th>DATE</th>
+        <th>TEAM</th>
+        <th>PLAYER</th>
+    </tr>
+    <tr th:each="e, itemStat : ${events}">
+        <td th:text="${e.type}">type</td>
+        <td th:text="${e.event_date}">date</td>
+        <td th:text="${e.team_id}">team</td>
+        <td th:text="${e.player_id}">player</td>
+    </tr>
+</table>
+<br>
+<form th:action="@{/allmatches/__${match_id}__/regevent}" method="get">
+    <form th:if="${permissionUser=='1'}">
+    <button type="submit">Add Event</button>
+    </form>
+</form>
+<form th:action="@{/allmatches/__${match_id}__/manageevent}" method="get">
+    <form th:if="${permissionAdmin=='1'}">
+        <button type="submit">Manage Event</button>
+    </form>
+</form>

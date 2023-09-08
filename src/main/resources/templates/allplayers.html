@@ -1,0 +1,19 @@
+<a th:href="@{/menu}">MENU</a>
+<br>
+<label>________________________________________________________________________________________________________</label>
+<br>
+<h1>ALL PLAYERS</h1>
+<table id="table1" border="1">
+    <tr>
+        <th>ID</th>
+        <th>NAME</th>
+        <th>POSITION</th>
+        <th>BIRTH DATE</th>
+    </tr>
+    <tr th:each="p: ${players}">
+        <td> <a th:href="@{/allplayers/{id}(id=${p.player_id})}"><label th:text="${p.player_id}"></label></a> </td>
+        <td th:text="${p.name}">name</td>
+        <td th:text="${p.position}">position</td>
+        <td th:text="${p.birth_date}">birth_date</td>
+    </tr>
+</table>

@@ -1,0 +1,30 @@
+<a th:href="@{/menu}">MENU</a> <a> - </a> <a th:href="@{/allplayers}">PLAYERS</a>
+<br>
+<label>________________________________________________________________________________________________________</label>
+<br>
+<h1 th:text="${player.name}">name</h1>
+<h3>Info</h3>
+<label>Position: </label> <label th:text="${player.position}">games</label>
+<br>
+<label>Birth Date: </label> <label th:text="${player.birth_date}">wins</label>
+<br>
+<br>
+<form th:action="@{/allplayers/__${player_id}__/manageplayer}" method="get">
+    <form th:if="${permissionAdmin=='1'}">
+        <button type="submit">Manage Player</button>
+    </form>
+</form>
+<br>
+<h3>Teams</h3>
+<table id="table1" border="1">
+    <tr>
+        <th>ID</th>
+        <th>EMBLEM</th>
+        <th>NAME</th>
+    </tr>
+    <tr th:each="t: ${teams}">
+        <td> <a th:href="@{/allteams/{id}(id=${t.team_id})}"><label th:text="${t.team_id}"></label></a> </td>
+        <td> <img th:src="${t.image_url}" height="50" width="50"></td>
+        <td th:text="${t.name}">name</td>
+    </tr>
+</table>
